@@ -2,18 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User update</title>
+    <title>Add User</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
 <h2>Employee info</h2>
 
 <form th:object="${user}" th:action="@{/saveUser}" th:method="post">
-    <input type="hidden" th:field="*{id}">
-    <label>Name: <input type="text" th:field="*{name}"/></label><br/><br/>
-    <label>Surname: <input type="text" th:field="*{surname}"/></label><br/><br/>
-    <label>Salary: <input type="text" th:field="*{salary}"/></label><br/><br/>
-    <input type="submit" value="OK"/>
+    <table>
+        <input type="hidden" th:field="*{id}"/>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td><input type="text" th:field="*{surname}"/></td>
+            <td th:if="${#fields.hasErrors('surname')}" th:errorclass="error" th:errors="*{surname}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Salary:</td>
+            <td><input type="text" th:field="*{salary}"/></td>
+            <td th:if="${#fields.hasErrors('salary')}" th:errorclass="error" th:errors="*{salary}">Name Error</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="OK"/></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
